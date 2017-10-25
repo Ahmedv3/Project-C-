@@ -5,9 +5,9 @@ Witam nazywam sie Jakub i pragnę stworzyć grę 2D dla dwóch graczy polegając
 
 ***
 ## Jakie funkcjonalności planuję?
-⋅⋅* System punktacji: przydzielanie punktu za każde odbicie piłki przez gracza.
-⋅⋅* Swobodny ruch obu graczy po osi Y.
-⋅⋅* Zbiór żetonów zmieniających zasady gry, oto kilka przykładów:
+..* System punktacji: przydzielanie punktu za każde odbicie piłki przez gracza.
+..* Swobodny ruch obu graczy po osi Y.
+..* Zbiór żetonów zmieniających zasady gry, oto kilka przykładów:
 1. Odwrócenie punktacji graczy
 2. Tymczasowo malejąca ilość punków przeciwnika wraz z poprawnym odbiciem drugiego gracza.
 3. Pojawienie się trzeciego gracza pod postacią komputeraz który utrudni grę obu graczom.
