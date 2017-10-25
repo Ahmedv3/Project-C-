@@ -22,6 +22,7 @@ Witam nazywam sie Jakub i pragnę stworzyć grę 2D dla dwóch graczy polegając
 W celu wykonania tego projektu użyję biblioteki [SFML 2.X](https://www.sfml-dev.org/)
 oraz programów graficznych typu gimp, Adobe.
 
-### Autor : Jakub Czarnecki - Student Informatyki stosowanej i systemów pomiarowych)
+### Autor
+Jakub Czarnecki - Student Informatyki stosowanej i systemów pomiarowych
 
 
