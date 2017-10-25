@@ -14,7 +14,8 @@ Witam nazywam sie Jakub i pragnę stworzyć grę 2D dla dwóch graczy polegając
 4. Losowe pojawianie się ścian na planszy przeszkadzajace graczom.
 5. Pomnożenie się piłeczek (każde odbicie dodatkowej piłeczki to dwa razy więcej punktów.
 * Ograniczenie czasowe (5min jedna rozgrywka) przy ostatnich 20 sekundach piłeczka zamieni się w bombę i jej prędkość wzrośnie wybuch na połowie przeciwnika doda 20pkt drugiemu graczowi.
-* Menu główne.
+* Menu główne. (Przyciski: Nowa gra, Wyjscie)
+* Ekran Koncowy (Podsumowanie ilości punków, wyłonienie zwycięzcy, przycisk nowa gra i wyjscie)
 * Muzyka w tle podczas rozgrywki.
 
 ***
