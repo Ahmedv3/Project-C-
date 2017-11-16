@@ -1,17 +1,19 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "Ball.h"
+#include "player1.h"
+#include "player2.h"
 using namespace std;
 using namespace sf;
 
 
 int main()
 {
-    Ball ball(400,300);
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Ping-PongSUTE");
+    player1 p1(150,360);
+    player2 p2(1130,360);
+    Ball ball(640,360);
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "Ping-PongSUTE");
     window.setFramerateLimit(60);
-    //sf::CircleShape shape(100.f);
-    //shape.setFillColor(sf::Color::Green);
     while (window.isOpen())
     {
         sf::Event event;
@@ -31,6 +33,10 @@ int main()
 
         window.clear(Color::Black);
         ball.update();
+        p1.update();
+        p2.update();
+        window.draw(p1);
+        window.draw(p2);
         window.draw(ball);
         window.display();
     }

@@ -19,7 +19,7 @@ void Ball::update()
   {
     velocity.x = ballvelocity;
   }
-  else if(this->right()>800)
+  else if(this->right()>1280)
   {
     velocity.x = -ballvelocity;
   }
@@ -27,7 +27,7 @@ void Ball::update()
   {
     velocity.y = ballvelocity;
   }
-  else if(this->bottom()>600)
+  else if(this->bottom()>720)
   {
     velocity.y = -ballvelocity;
   }

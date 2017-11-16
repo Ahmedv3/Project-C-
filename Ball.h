@@ -14,8 +14,8 @@ class Ball: public sf::Drawable
         float bottom();
     private:
       CircleShape shape;
-      const float ballRadius {10.0f};
-      const float ballvelocity {3.0f};
+      const float ballRadius {15.0f};
+      const float ballvelocity {5.0f};
       Vector2f velocity {ballvelocity,ballvelocity};
       void draw(RenderTarget& target, RenderStates state) const override;
 };
