@@ -46,3 +46,8 @@ float player1::bottom()
 {
   return this->shape.getPosition().y + shape.getSize().y/2.f;
 }
+
+Vector2f player1::getPosition()
+{
+  return shape.getPosition();
+}

@@ -8,6 +8,12 @@ class player1 :public sf::Drawable
         player1() = delete;
         ~player1()=default;
         void update();
+        float right();
+        float left();
+        float top();
+        float bottom();
+
+        Vector2f getPosition();
     private:
       void draw(RenderTarget& target, RenderStates state) const override;
       RectangleShape shape;
@@ -16,8 +22,5 @@ class player1 :public sf::Drawable
       const float paddleVelocity {6.0f};
       Vector2f velocity {0.f,paddleVelocity};
 
-      float right();
-      float left();
-      float top();
-      float bottom();
+
 };
