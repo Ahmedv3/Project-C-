@@ -1,7 +1,13 @@
+#include "iostream"
 #include "Ball.h"
+#include <cstdlib>
+#include <ctime>
+
+
 
 Ball::Ball(float t_X,float t_Y)
 {
+    srand( time( NULL ) );
     shape.setPosition(t_X,t_Y);
     shape.setRadius(this->ballRadius);
     shape.setFillColor(Color::White);
@@ -10,8 +16,18 @@ Ball::Ball(float t_X,float t_Y)
 
 void Ball::draw(RenderTarget& target, RenderStates state) const
 {
+
   target.draw(this->shape,state);
 }
+
+void Ball::destroy()
+{
+  float X = rand() % 1100+200;
+  float Y = rand() % 360;
+  shape.setPosition(X,Y);
+  ballvelocity = ballvelocity + 0.2f;
+}
+
 void Ball::update()
 {
   shape.move(this->velocity);

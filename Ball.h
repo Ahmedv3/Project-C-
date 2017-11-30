@@ -7,6 +7,8 @@ class Ball: public sf::Drawable
         Ball() = delete;
         ~Ball() = default;
 
+        void destroy();
+
         void update();
 
         void moveUp();
@@ -23,7 +25,7 @@ class Ball: public sf::Drawable
     private:
       CircleShape shape;
       const float ballRadius {15.0f};
-      const float ballvelocity {7.0f};
+      float ballvelocity {6.0f};
       Vector2f velocity {ballvelocity,ballvelocity};
       void draw(RenderTarget& target, RenderStates state) const override;
 };

@@ -47,19 +47,23 @@ void check_points(Ball& ball, int& p1_pkt, int& p2_pkt, Text& punkt1, Text& punk
 {
   if(ball.getPosition().x < 15)
   {
+    ball.destroy();
     p1_pkt++;
     std::string _str1 = std::to_string(p1_pkt);
     punkt1.setString(_str1);
-    //cout << "punkty gracza1 to "<< p1_pkt <<endl;
+
   }
   else if(ball.getPosition().x > 1265)
   {
+    ball.destroy();
     p2_pkt++;
     std::string _str = std::to_string(p2_pkt);
     punkt2.setString(_str);
-    //cout << "punkty gracza2 to "<< p2_pkt <<endl;
+    
   }
 }
+
+
 
 int main()
 {
@@ -73,11 +77,11 @@ int main()
     points1.setFont(font);
     points1.setCharacterSize(30);
     points1.setColor(sf::Color::White);
-    points1.setPosition(10,10);
+    points1.setPosition(1255,10);
     points2.setFont(font);
     points2.setCharacterSize(30);
     points2.setColor(Color::White);
-    points2.setPosition(1255,10);
+    points2.setPosition(10,10);
 
 
     player1 p1(150,360);
