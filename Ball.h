@@ -8,6 +8,7 @@ class Ball: public sf::Drawable
         ~Ball() = default;
 
         void destroy();
+        void acceleration();
 
         void update();
 
@@ -22,6 +23,7 @@ class Ball: public sf::Drawable
         float right();
         float top();
         float bottom();
+
     private:
       CircleShape shape;
       const float ballRadius {15.0f};

@@ -20,10 +20,12 @@ bool collisionTest(player1& p1,Ball& ball)
   if(ball.getPosition().x < p1.getPosition().x)
   {
     ball.moveLeft();
+    ball.acceleration();
   }
   else if(ball.getPosition().x > p1.getPosition().x)
   {
     ball.moveRight();
+    ball.acceleration();
   }
   return true;
 }
@@ -35,10 +37,12 @@ bool collisionTest2(player2& p2,Ball& ball)
   if(ball.getPosition().x < p2.getPosition().x)
   {
     ball.moveLeft();
+    ball.acceleration();
   }
   else if(ball.getPosition().x > p2.getPosition().x)
   {
     ball.moveRight();
+    ball.acceleration();
   }
   return true;
 }
