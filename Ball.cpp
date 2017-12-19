@@ -21,14 +21,11 @@ void Ball::draw(RenderTarget& target, RenderStates state) const
 }
 void Ball::acceleration()
 {
-  ballvelocity = ballvelocity + 0.08f;
+  ballvelocity = ballvelocity + 0.18f;
 }
 
 void Ball::destroy()
 {
-  //float X = rand() % 1100+200;
- // float Y = rand() % 360;
- // shape.setPosition(X,Y);
   shape.setPosition(640,360);
   ballvelocity = 6.0f;
 
@@ -36,18 +33,18 @@ void Ball::destroy()
   {
     velocity.x = -ballvelocity;
   }
-  else
+  else if(velocity.x == -ballvelocity)
   {
     velocity.x = ballvelocity;
   }
-  if(velocity.y == ballvelocity)
+  /*if(velocity.y == ballvelocity)
   {
     velocity.y = -ballvelocity;
   }
-  else
+  else if(velocity.y == -ballvelocity)
   {
     velocity.y = ballvelocity;
-  }
+  }*/
 }
 
 void Ball::update()

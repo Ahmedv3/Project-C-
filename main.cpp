@@ -7,7 +7,6 @@
 #include "player2.h"
 #include "menu.h"
 
-
 using namespace std;
 using namespace sf;
 
@@ -49,7 +48,7 @@ bool collisionTest2(player2& p2,Ball& ball)
   return true;
 }
 
-void check_points(Ball& ball, int& p1_pkt, int& p2_pkt, Text& punkt1, Text& punkt2)
+int check_points(Ball& ball, int& p1_pkt, Text& punkt1)
 {
   if(ball.getPosition().x < 15)
   {
@@ -57,43 +56,94 @@ void check_points(Ball& ball, int& p1_pkt, int& p2_pkt, Text& punkt1, Text& punk
     p1_pkt++;
     std::string _str1 = std::to_string(p1_pkt);
     punkt1.setString(_str1);
-
   }
-  else if(ball.getPosition().x > 1265)
-  {
-    ball.destroy();
-    p2_pkt++;
-    std::string _str = std::to_string(p2_pkt);
-    punkt2.setString(_str);
+  return p1_pkt;
+}
 
-  }
+int check_points2(Ball& ball,int& p2_pkt,Text& punkt2)
+{
+  if(ball.getPosition().x > 1265)
+    {
+      ball.destroy();
+      p2_pkt++;
+      std::string _str = std::to_string(p2_pkt);
+      punkt2.setString(_str);
+    }
+  return p2_pkt;
+}
+
+void endgame(RenderWindow& window,Text& text)
+{
+  window.close();
+  sf::RenderWindow windowEnd(sf::VideoMode(1280, 720), "Ping-PongSUTE_Endgame");
+  windowEnd.setFramerateLimit(60);
+
+  while (windowEnd.isOpen())
+    {
+        sf::Event event;
+        while (windowEnd.pollEvent(event))
+        {
+          if (event.type == sf::Event::Closed)
+            {
+              windowEnd.close();
+              break;
+            }
+            if (Keyboard::isKeyPressed(Keyboard::Escape))
+              {
+                windowEnd.close();
+                break;
+              }
+        }
+
+        windowEnd.clear(Color::Black);
+        windowEnd.draw(text);
+        windowEnd.display();
+    }
 }
 
 int main()
 {
+    auto White = Color::White;  //colors
+
     int p1_point = 0;
     int p2_point = 0;
+
+    menu menu_test;
 
     sf::Font font;
     font.loadFromFile("arial.ttf");
     Text points1;
     Text points2;
 
-    /*Text tekst_menu;
-    tekst_menu.setFont(font);
-    tekst_menu.setCharacterSize(30);
-    tekst_menu.setColor(sf::Color::White);
-    tekst_menu.setPosition(440,30);
-    tekst_menu.setString("Ping-Pong:SuperUltraTurboExtreme!!!");*/
+    Text naglowek;
+    naglowek.setFont(font);
+    naglowek.setCharacterSize(40);
+    naglowek.setColor(White);
+    naglowek.setPosition(75,30);
+    naglowek.setString("Ping-Pong:SuperUltraTurboExtreme!!!");
+
+    Text koniec;
+    koniec.setFont(font);
+    koniec.setCharacterSize(40);
+    koniec.setColor(White);
+    koniec.setPosition(450,30);
+    koniec.setString("Koniec gry!");
+
+    Text start;
+    start.setFont(font);
+    start.setCharacterSize(30);
+    start.setColor(White);
+    start.setPosition(225,450);
+    start.setString("Wcisnij Spacje by zagrac!");
 
     points1.setFont(font);
     points1.setCharacterSize(30);
-    points1.setColor(sf::Color::White);
+    points1.setColor(White);
     points1.setPosition(1255,10);
 
     points2.setFont(font);
     points2.setCharacterSize(30);
-    points2.setColor(Color::White);
+    points2.setColor(White);
     points2.setPosition(10,10);
 
 
@@ -101,16 +151,12 @@ int main()
     player2 p2(1130,360);
     Ball ball(640,360);
 
-    
+
 
     sf::RenderWindow window2(sf::VideoMode(800, 600), "Ping-PongSUTE_Main-Menu");
     window2.setFramerateLimit(60);
 
-    menu menu_test;
 
-    /*Mouse mouse;
-    sf::Vector2i position = sf::Mouse::getPosition();
-    sf::Mouse::setPosition(sf::Vector2i(640, 360), window);*/
 
     while (window2.isOpen())
     {
@@ -127,11 +173,12 @@ int main()
                 window2.close();
                 break;
               }
-            if (Keyboard::isKeyPressed(Keyboard::Key::Q))
+            if (Keyboard::isKeyPressed(Keyboard::Key::Space))
               {
                 menu_test.start = true;
                 break;
               }
+
         }
 
         if(menu_test.start == true)
@@ -163,7 +210,19 @@ int main()
                         p2.update();
                         collisionTest(p1,ball);
                         collisionTest2(p2,ball);
-                        check_points(ball,p1_point,p2_point,points1,points2);
+                        check_points(ball,p1_point,points1);
+                        check_points2(ball,p2_point,points2);
+
+                        if(check_points(ball,p1_point,points1)>=2)
+                          {
+                            endgame(window,koniec);
+                            break;
+                          }
+                        else if(check_points2(ball,p2_point,points2)>=2)
+                        {
+                          endgame(window,koniec);
+                          break;
+                        }
                         window.draw(points1);
                         window.draw(points2);
                         window.draw(p1);
@@ -175,6 +234,8 @@ int main()
         else if(menu_test.start == false)
         {
           window2.clear(Color::Black);
+          window2.draw(naglowek);
+          window2.draw(start);
           window2.display();
         }
     }

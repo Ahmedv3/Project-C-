@@ -7,7 +7,7 @@ class menu
     public:
 
         menu();
-        bool start= false; 
+        bool start= false;
 
         bool show(bool start);
 
