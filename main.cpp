@@ -6,6 +6,7 @@
 #include "player1.h"
 #include "player2.h"
 #include "menu.h"
+#include <time.h>
 
 using namespace std;
 using namespace sf;
@@ -100,6 +101,16 @@ void endgame(RenderWindow& window,Text& text)
         windowEnd.display();
     }
 }
+void changePosition(Clock& clock,bool& piewszyRaz,CircleShape& circle)
+{
+  int ble = clock.getElapsedTime().asMilliseconds();
+  if (ble > 2000)
+    {
+      circle.setPosition(400,600);
+      piewszyRaz = true;
+    }
+
+}
 
 
 int main()
@@ -113,8 +124,13 @@ int main()
     circle.setRadius(50);
     circle.setFillColor(sf::Color::Yellow);
     circle.setPosition(200, 300);
-    
-    
+
+    int time1;
+    bool pierwszyRaz = true;
+    sf::Clock clock;
+
+
+
     menu menu_test;
     Texture background;
     background.loadFromFile("ping-pong-menu.png");
@@ -236,6 +252,13 @@ int main()
                           endgame(window,koniec);
                           break;
                         }
+                        if (pierwszyRaz)
+                        {
+                        clock.restart(); // ustawienie zegarka na 0
+                          pierwszyRaz = false;
+                        }
+
+                        changePosition( clock, pierwszyRaz, circle);
                         window.draw(points1);
                         window.draw(points2);
                         window.draw(p1);
