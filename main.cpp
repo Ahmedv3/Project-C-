@@ -74,7 +74,7 @@ int check_points2(Ball& ball,int& p2_pkt,Text& punkt2)
 
 void endgame(RenderWindow& window,Text& text)
 {
-  window.close();
+
   sf::RenderWindow windowEnd(sf::VideoMode(1280, 720), "Ping-PongSUTE_Endgame");
   windowEnd.setFramerateLimit(60);
 
@@ -94,12 +94,13 @@ void endgame(RenderWindow& window,Text& text)
                 break;
               }
         }
-
+        window.close();
         windowEnd.clear(Color::Black);
         windowEnd.draw(text);
         windowEnd.display();
     }
 }
+
 
 int main()
 {
@@ -108,7 +109,19 @@ int main()
     int p1_point = 0;
     int p2_point = 0;
 
+    CircleShape circle;
+    circle.setRadius(50);
+    circle.setFillColor(sf::Color::Yellow);
+    circle.setPosition(200, 300);
+    
+    
     menu menu_test;
+    Texture background;
+    background.loadFromFile("ping-pong-menu.png");
+    sf::Sprite tlo(background);
+    tlo.setPosition(0,0);
+
+
 
     sf::Font font;
     font.loadFromFile("arial.ttf");
@@ -126,7 +139,7 @@ int main()
     koniec.setFont(font);
     koniec.setCharacterSize(40);
     koniec.setColor(White);
-    koniec.setPosition(450,30);
+    koniec.setPosition(550,30);
     koniec.setString("Koniec gry!");
 
     Text start;
@@ -213,12 +226,12 @@ int main()
                         check_points(ball,p1_point,points1);
                         check_points2(ball,p2_point,points2);
 
-                        if(check_points(ball,p1_point,points1)>=2)
+                        if(check_points(ball,p1_point,points1)>=10)
                           {
                             endgame(window,koniec);
                             break;
                           }
-                        else if(check_points2(ball,p2_point,points2)>=2)
+                        else if(check_points2(ball,p2_point,points2)>=10)
                         {
                           endgame(window,koniec);
                           break;
@@ -227,6 +240,7 @@ int main()
                         window.draw(points2);
                         window.draw(p1);
                         window.draw(p2);
+                        window.draw(circle);
                         window.draw(ball);
                         window.display();
                 }
@@ -234,8 +248,7 @@ int main()
         else if(menu_test.start == false)
         {
           window2.clear(Color::Black);
-          window2.draw(naglowek);
-          window2.draw(start);
+          window2.draw(tlo);
           window2.display();
         }
     }
