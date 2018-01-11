@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include <string>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -101,43 +102,52 @@ void endgame(RenderWindow& window,Text& text)
         windowEnd.display();
     }
 }
-void changePosition(Clock& clock,bool& piewszyRaz,CircleShape& circle)
+void changePosition(Clock& clock,bool& piewszyRaz,CircleShape& circle,Ball& ball)
 {
-  int ble = clock.getElapsedTime().asMilliseconds();
-  if (ble > 2000)
+  int czas = clock.getElapsedTime().asMilliseconds();
+  if (czas >= 8000)
     {
-      circle.setPosition(400,600);
+      int X =( rand() % 700 ) + 300;
+      int Y =( rand() % 500 ) + 100;
+      circle.setPosition(X,Y);
+      piewszyRaz = true;
+    }
+    else if(ball.getPosition().y >= circle.getPosition().y && ball.getPosition().y <= circle.getPosition().y+50.0f && ball.getPosition().x >= circle.getPosition().x && ball.getPosition().x <= circle.getPosition().x+50.0f )
+    {
+      int X =( rand() % 700 ) + 300;
+      int Y =( rand() % 500 ) + 100;
+      circle.setPosition(X,Y);
       piewszyRaz = true;
     }
 
 }
 
-
 int main()
 {
+    srand( time( NULL ) );
+
     auto White = Color::White;  //colors
 
     int p1_point = 0;
     int p2_point = 0;
+    int X =( rand() % 700 ) + 300;
+    int Y =( rand() % 500 ) + 100;
 
     CircleShape circle;
-    circle.setRadius(50);
+    circle.setRadius(50.0f);
     circle.setFillColor(sf::Color::Yellow);
-    circle.setPosition(200, 300);
+    circle.setPosition(X,Y);
+    //circle.setOrigin(50.0f,50.0f);
 
     int time1;
     bool pierwszyRaz = true;
     sf::Clock clock;
-
-
 
     menu menu_test;
     Texture background;
     background.loadFromFile("ping-pong-menu.png");
     sf::Sprite tlo(background);
     tlo.setPosition(0,0);
-
-
 
     sf::Font font;
     font.loadFromFile("arial.ttf");
@@ -179,8 +189,6 @@ int main()
     player1 p1(150,360);
     player2 p2(1130,360);
     Ball ball(640,360);
-
-
 
     sf::RenderWindow window2(sf::VideoMode(800, 600), "Ping-PongSUTE_Main-Menu");
     window2.setFramerateLimit(60);
@@ -258,7 +266,7 @@ int main()
                           pierwszyRaz = false;
                         }
 
-                        changePosition( clock, pierwszyRaz, circle);
+                        changePosition( clock, pierwszyRaz, circle,ball);
                         window.draw(points1);
                         window.draw(points2);
                         window.draw(p1);
