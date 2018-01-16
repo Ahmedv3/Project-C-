@@ -101,3 +101,21 @@ Vector2f Ball::getPosition()
 {
   return shape.getPosition();
 }
+
+void Ball::ball_bonus_pos()
+{
+  int randX = ( rand() % 700 ) + 300;
+  int randY = ( rand() % 500 ) + 100;
+  shape.setPosition(randX,randY);
+}
+void Ball::ball_bonus_color()
+{
+  sf::Color color(15, 13, 13);
+  shape.setFillColor(color);
+}
+
+void Ball::ball_bonus_return_color()
+{
+  sf::Color color1(255, 255, 255);
+  shape.setFillColor(color1);
+}
