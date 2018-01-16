@@ -7,7 +7,7 @@
 #include "player1.h"
 #include "player2.h"
 #include "menu.h"
-#include <time.h>
+#include "bonus.h"
 
 using namespace std;
 using namespace sf;
@@ -102,7 +102,46 @@ void endgame(RenderWindow& window,Text& text)
         windowEnd.display();
     }
 }
-void changePosition(Clock& clock,bool& piewszyRaz,CircleShape& circle,Ball& ball)
+
+
+void addBonus(int& los,RenderWindow& window,bonus *b1,Clock& clock,bool& pierwszyRaz)
+{
+
+  int czas2 = clock.getElapsedTime().asMilliseconds();
+  if(los == 1)
+  {
+    if (czas2 <= 15000){
+      cout << "test 1" << endl;
+      b1 -> update();
+      window.draw(*b1);
+    }
+    else{
+      cout << "test 1" << endl;
+      b1 -> update();
+      window.draw(*b1);
+    }
+    pierwszyRaz = true;
+  
+  }
+  else if(los == 2)
+  {
+    if (czas2 <= 15000){
+      cout << "test 2" << endl;
+    }
+    pierwszyRaz = true;
+
+  }
+  else if(los == 3)
+  {
+    if (czas2 <= 15000){
+      cout << "test 3" << endl;
+    } 
+    pierwszyRaz = true;    
+
+  }
+}
+
+bool changePosition(Clock& clock,bool& piewszyRaz,CircleShape& circle,Ball& ball,int& los)
 {
   int czas = clock.getElapsedTime().asMilliseconds();
   if (czas >= 8000)
@@ -111,13 +150,16 @@ void changePosition(Clock& clock,bool& piewszyRaz,CircleShape& circle,Ball& ball
       int Y =( rand() % 500 ) + 100;
       circle.setPosition(X,Y);
       piewszyRaz = true;
+      return false;
     }
-    else if(ball.getPosition().y >= circle.getPosition().y && ball.getPosition().y <= circle.getPosition().y+50.0f && ball.getPosition().x >= circle.getPosition().x && ball.getPosition().x <= circle.getPosition().x+50.0f )
+    else if(ball.getPosition().y >= circle.getPosition().y && ball.getPosition().y <= circle.getPosition().y+100.0f && ball.getPosition().x >= circle.getPosition().x && ball.getPosition().x <= circle.getPosition().x+100.0f )
     {
       int X =( rand() % 700 ) + 300;
       int Y =( rand() % 500 ) + 100;
       circle.setPosition(X,Y);
+      los = ( rand()% 3 ) + 1;
       piewszyRaz = true;
+      return true;
     }
 
 }
@@ -127,7 +169,7 @@ int main()
     srand( time( NULL ) );
 
     auto White = Color::White;  //colors
-
+    int los;
     int p1_point = 0;
     int p2_point = 0;
     int X =( rand() % 700 ) + 300;
@@ -137,12 +179,14 @@ int main()
     circle.setRadius(50.0f);
     circle.setFillColor(sf::Color::Yellow);
     circle.setPosition(X,Y);
-    //circle.setOrigin(50.0f,50.0f);
 
-    int time1;
+    bonus* b1 = new bonus;
+
+
+
     bool pierwszyRaz = true;
     sf::Clock clock;
-
+    sf::Clock clock2;
     menu menu_test;
     Texture background;
     background.loadFromFile("ping-pong-menu.png");
@@ -245,6 +289,7 @@ int main()
                         ball.update();
                         p1.update();
                         p2.update();
+
                         collisionTest(p1,ball);
                         collisionTest2(p2,ball);
                         check_points(ball,p1_point,points1);
@@ -260,13 +305,20 @@ int main()
                           endgame(window,koniec);
                           break;
                         }
+
                         if (pierwszyRaz)
                         {
                         clock.restart(); // ustawienie zegarka na 0
                           pierwszyRaz = false;
                         }
 
-                        changePosition( clock, pierwszyRaz, circle,ball);
+                        //changePosition( clock, pierwszyRaz, circle,ball,los);
+
+                        if(changePosition( clock, pierwszyRaz, circle,ball,los) == true)
+                        { 
+                          addBonus(los,window,b1,clock,pierwszyRaz);
+                        }
+
                         window.draw(points1);
                         window.draw(points2);
                         window.draw(p1);

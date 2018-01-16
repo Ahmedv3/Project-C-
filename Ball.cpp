@@ -37,14 +37,7 @@ void Ball::destroy()
   {
     velocity.x = ballvelocity;
   }
-  /*if(velocity.y == ballvelocity)
-  {
-    velocity.y = -ballvelocity;
-  }
-  else if(velocity.y == -ballvelocity)
-  {
-    velocity.y = ballvelocity;
-  }*/
+
 }
 
 void Ball::update()

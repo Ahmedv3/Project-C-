@@ -24,6 +24,7 @@ class Ball: public sf::Drawable
         float top();
         float bottom();
 
+
     private:
       CircleShape shape;
       const float ballRadius {15.0f};
