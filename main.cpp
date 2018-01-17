@@ -3,6 +3,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
 #include "Ball.h"
 #include "player1.h"
 #include "player2.h"
@@ -172,7 +173,7 @@ void addBonus(int& los,RenderWindow& window,bonus *b1,Clock& clock2,Ball& ball,p
         los = 0;
       }
       else {
-        cout << "test 1" << endl;
+
         b1 -> update();
         window.draw(*b1);
         collisionTest_bonus2(p2,b1);
@@ -183,7 +184,7 @@ void addBonus(int& los,RenderWindow& window,bonus *b1,Clock& clock2,Ball& ball,p
   }
   else if(los == 2)
   {
-      cout << "test 2" << endl;
+
       ball.ball_bonus_pos();
       los = 0;
   }
@@ -196,7 +197,7 @@ void addBonus(int& los,RenderWindow& window,bonus *b1,Clock& clock2,Ball& ball,p
         los = 0;
       }
       else{
-        cout << "test 3" << endl;
+
         ball.ball_bonus_color();
       }
 
@@ -282,9 +283,8 @@ int main()
     Text koniec;
     koniec.setFont(font);
     koniec.setCharacterSize(40);
-    koniec.setColor(White);
-    koniec.setPosition(550,30);
-    koniec.setString("Koniec gry!");
+    koniec.setColor(sf::Color::Cyan);
+    koniec.setPosition(420,30);
 
     Text start;
     start.setFont(font);
@@ -302,6 +302,15 @@ int main()
     points2.setCharacterSize(30);
     points2.setColor(White);
     points2.setPosition(25,10);
+
+
+    sf::Music music;
+    music.openFromFile("pong_music.ogg");
+    music.setVolume(50);
+    music.setLoop(true);
+    music.play();
+
+
 
 
     player1 p1(150,360);
@@ -372,11 +381,13 @@ int main()
 
                         if(check_points(ball,p1_point,points1)>=10)
                           {
+                            koniec.setString("Wygrywa gracz drugi !!");
                             endgame(window,koniec,endScreen);
                             break;
                           }
                         else if(check_points2(ball,p2_point,points2)>=10)
                         {
+                          koniec.setString("Wygrywa gracz pierwszy !!");
                           endgame(window,koniec,endScreen);
                           break;
                         }
