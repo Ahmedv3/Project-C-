@@ -189,8 +189,7 @@ void addBonus(int& los,RenderWindow& window,bonus *b1,Clock& clock2,Ball& ball,p
       los = 0;
   }
 
-  else if(los == 3)
-  {
+  else if(los == 3){
       int czas2 = clock2.getElapsedTime().asMilliseconds();
       if(czas2 >= 2000){
         ball.ball_bonus_return_color();
@@ -394,12 +393,12 @@ int main()
 
                         if (pierwszyRaz)
                         {
-                        clock.restart(); // ustawienie zegarka na 0
+                          clock.restart(); // ustawienie zegarka na 0
                           pierwszyRaz = false;
                         }
                         if (drugiRaz)
                         {
-                        clock2.restart();
+                          clock2.restart();
                           drugiRaz = false;
                         }
 
